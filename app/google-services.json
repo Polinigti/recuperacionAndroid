@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "654233076343",
+    "project_id": "recuperacionandroid-f10ac",
+    "storage_bucket": "recuperacionandroid-f10ac.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:654233076343:android:13886e543dcc6b0c6cbc72",
+        "android_client_info": {
+          "package_name": "com.polini.recuperacionandroid"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCpYDpt-w-Fi-YzCEpthKTx9OXCOQ2dzO4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

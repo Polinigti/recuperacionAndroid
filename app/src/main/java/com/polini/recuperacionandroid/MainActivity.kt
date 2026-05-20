@@ -14,6 +14,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
+import com.polini.recuperacionandroid.screens.LoginScreen
 import com.polini.recuperacionandroid.ui.theme.RecuperacionAndroidTheme
 
 class MainActivity : ComponentActivity() {
@@ -27,7 +28,9 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             RecuperacionAndroidTheme {
-
+                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                    LoginScreen(auth = auth, modifier = Modifier.padding(innerPadding))
+                }
             }
         }
     }
