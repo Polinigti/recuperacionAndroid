@@ -2,11 +2,13 @@ package com.polini.recuperacionandroid.screens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
@@ -59,7 +61,7 @@ fun NuevoScreen(onAgregarJuego: (Juego) -> Unit, onNavigateBack: () -> Unit) {
         TextField(
             value = consola,
             onValueChange = { consola = it },
-            label = { Text("Consola") },
+            label = { Text("Plataforma") },
         )
         Spacer(modifier = Modifier.height(8.dp))
         TextField(
@@ -68,30 +70,34 @@ fun NuevoScreen(onAgregarJuego: (Juego) -> Unit, onNavigateBack: () -> Unit) {
             label = { Text("URL Imagen") },
         )
         Spacer(modifier = Modifier.height(16.dp))
-        Button(modifier = Modifier.fillMaxWidth()
-            .padding(start = 40.dp, end = 40.dp),
-            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF5D7D7C)),
-            onClick = {
-                if (nombre.isNotBlank()) {
-                    val notaDouble = nota.toDoubleOrNull() ?: 0.0
-                    onAgregarJuego(Juego(
-                        nombre, consola, notaDouble,
-                        descripcion = descripcion,
-                        consola = consola,
-                        imagenUrl = imagenUrl
-                    ))
-                    nombre = ""
-                    nota = ""
-                    descripcion = ""
-                    consola = ""
-                    imagenUrl = ""
-                    onNavigateBack()
-                }
-            }) {
-            Text("Agregar Juego")
+        Row(horizontalArrangement = Arrangement.Start, modifier = Modifier.fillMaxWidth()) {
+            Button(modifier = Modifier.fillMaxWidth()
+                .padding(start = 40.dp, end = 40.dp),
+                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF5D7D7C)),
+                onClick = {
+                    if (nombre.isNotBlank() && consola.isNotBlank()) {
+                        val notaDouble = nota.toDoubleOrNull() ?: 0.0
+                        onAgregarJuego(Juego(
+                            nombre = nombre,
+                            nota = notaDouble,
+                            descripcion = descripcion,
+                            consola = consola,
+                            imagenUrl = imagenUrl
+                        ))
+                        nombre = ""
+                        nota = ""
+                        descripcion = ""
+                        consola = ""
+                        imagenUrl = ""
+                        onNavigateBack()
+                    }
+                }) {
+                Text("Agregar Juego")
+            }
+            Spacer(modifier = Modifier.width(20.dp))
+            Button(onClick = { onNavigateBack() }) {
+                Text("Cancelar")
+            }
         }
-
-
     }
-
 }
