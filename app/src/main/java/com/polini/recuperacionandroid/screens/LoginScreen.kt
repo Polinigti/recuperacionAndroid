@@ -34,10 +34,10 @@ import com.google.firebase.auth.FirebaseAuth
 import com.polini.recuperacionandroid.R
 
 @Composable
-fun LoginScreen(auth: FirebaseAuth,modifier: Modifier) {
+fun LoginScreen(auth: FirebaseAuth,modifier: Modifier,onLoginSuccess:()-> Unit) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
-    var error by remember { mutableStateOf(false) }
+    var errorMessage by remember { mutableStateOf<String?>(null) }
     var visible by remember { mutableStateOf(true) }
 
     Column(
@@ -76,28 +76,28 @@ fun LoginScreen(auth: FirebaseAuth,modifier: Modifier) {
             if (email.isNotEmpty() && password.isNotEmpty()) {
                 auth.signInWithEmailAndPassword(email, password)
                     .addOnSuccessListener {
-                        // TODO: Navigate to next screen
+                        onLoginSuccess()
                     }
                     .addOnFailureListener {
-                        error = true
+                        errorMessage = "Credenciales incorrectas o error de conexión."
                     }
             }else{
-                error = true
+                errorMessage = "Por favor, rellene todos los campos."
             }
         }) {
             Text("Login")
         }
 
-        if (error) {
+        errorMessage?.let { message ->
             AlertDialog(
-                onDismissRequest = { error = false },
+                onDismissRequest = { errorMessage = null },
                 confirmButton = {
-                    Button(onClick = { error = false }) {
+                    Button(onClick = { errorMessage = null }) {
                         Text("Aceptar")
                     }
                 },
                 title = { Text("Error") },
-                text = { Text("Por favor, rellene todos los campos.") }
+                text = { Text(message) }
             )
         }
     }

@@ -13,7 +13,7 @@ import androidx.compose.ui.unit.dp
 import com.google.firebase.auth.FirebaseAuth
 
 @Composable
-fun HomeScreen(auth: FirebaseAuth, onNavigateToNuevo: () -> Unit, onLogout: () -> Unit) {
+fun HomeScreen(auth: FirebaseAuth, onNavigateToNuevo: () -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxSize()
