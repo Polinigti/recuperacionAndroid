@@ -4,7 +4,9 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -33,50 +35,76 @@ fun TarjetaJuego(
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(8.dp)
-    ) {
+            .padding(bottom = 8.dp)
+    ) {Column(Modifier.fillMaxSize()) {
         Row(
-            modifier = Modifier.padding(16.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(12.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Text(juego.nota.toString(),)
-            Spacer(modifier = Modifier.width(10.dp))
-            AsyncImage(
-                model = juego.imagenUrl,
-                contentDescription = "Imagen del juego",
-                modifier = Modifier.size(64.dp)
+            Text(
+                text = "${juego.nota}",
+                style = MaterialTheme.typography.titleSmall
             )
-            Column(modifier = Modifier.weight(1f).padding(horizontal = 16.dp), horizontalAlignment = Alignment.Start) {
-                Text(text = juego.nombre, style = MaterialTheme.typography.titleMedium)
-                    if (juego.consola == "nintendo"){
-                        Image(
-                            painterResource(R.drawable.nintendo),
-                            contentDescription = "Logo consola"
-                        )
-                    } else if (juego.consola == "playstation") {
-                    Image(
-                        painterResource(R.drawable.ps),
-                        contentDescription = "Logo consola"
-                    )
-                }else if (juego.consola == "xbox") {
-                        Image(
-                            painterResource(R.drawable.xbox),
-                            contentDescription = "Logo consola"
-                        )
-                }else{
-                        Image(
-                            painterResource(R.drawable.windows),
-                            contentDescription = "Logo consola"
-                        )
-                }
-                Text(juego.descripcion, fontStyle = FontStyle.Italic)
-            }
-            Column (horizontalAlignment = Alignment.End) {
+            Spacer(modifier = Modifier.width(8.dp))
+            AsyncImage(model = juego.imagenUrl,
+                contentDescription = "Imagen del juego",
+                modifier = Modifier.size(40.dp))
 
-                IconButton(onClick = onEliminar) {
-                    Icon(imageVector = Icons.Default.Delete, contentDescription = "Eliminar")
+            Spacer(modifier = Modifier.width(12.dp))
+
+            Column(modifier = Modifier.weight(1f)) {
+                Text(
+                    text = juego.nombre,
+                    style = MaterialTheme.typography.titleMedium
+                )
+
+                if (juego.consola == "nintendo"){
+                    Image(
+                        painter = painterResource(id = R.drawable.nintendo),
+                        contentDescription = "Nintendo",
+                        modifier = Modifier.size(24.dp)
+                    )
+                }else if (juego.consola == "play"){
+                    Image(
+                        painter = painterResource(id = R.drawable.ps),
+                        contentDescription = "Play",
+                        modifier = Modifier.size(24.dp)
+                    )
+                }else if (juego.consola == "pc"){
+                    Image(
+                        painter = painterResource(id = R.drawable.windows),
+                        contentDescription = "Play",
+                        modifier = Modifier.size(24.dp)
+                    )
+                }else if (juego.consola == "xbox"){
+                    Image(
+                        painter = painterResource(id = R.drawable.xbox),
+                        contentDescription = "Xbox",
+                        modifier = Modifier.size(24.dp)
+                    )
                 }
+
+                Text(
+                    text = juego.descripcion,
+                    style = MaterialTheme.typography.bodySmall,
+                    fontStyle = FontStyle.Italic
+                )
+            }
+
+            IconButton(
+                onClick = {
+                    onEliminar()
+                }
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Delete,
+                    contentDescription = "Eliminar"
+                )
             }
         }
     }
+    }
+
 }

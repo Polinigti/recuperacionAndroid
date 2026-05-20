@@ -11,6 +11,7 @@ import com.polini.recuperacionandroid.screens.HomeScreen
 import com.polini.recuperacionandroid.screens.LoginScreen
 import com.polini.recuperacionandroid.screens.NuevoScreen
 import com.polini.recuperacionandroid.viewmodel.JuegoViewModel
+import com.polini.recuperacionandroid.data.Juego
 
 @Composable
 fun GestionNavegacion() {
@@ -41,17 +42,23 @@ fun GestionNavegacion() {
                     auth = auth,
                     onNavigateToNuevo = {
                         pilaNavegacion.add(Routes.Nuevo)
-                    }
+                    },
+                    getJuegoViewModel = juegoViewModel
                 )
             }
 
             is Routes.Nuevo -> NavEntry(key) {
                 NuevoScreen(
-                    viewModel = juegoViewModel,
-                    onNavigateBack = {
-                        pilaNavegacion.removeLastOrNull()
+                    onAgregarJuego = { juego ->
+                        juegoViewModel.agregarJuego(
+                            juego.nombre,
+                            juego.nota,
+                            juego.descripcion,
+                            juego.consola,
+                            juego.imagenUrl
+                        )
                     },
-                    onAgregarJuego = {
+                    onNavigateBack = {
                         pilaNavegacion.removeLastOrNull()
                     }
                 )

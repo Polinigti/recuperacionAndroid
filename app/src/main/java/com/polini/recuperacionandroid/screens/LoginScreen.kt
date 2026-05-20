@@ -38,7 +38,7 @@ fun LoginScreen(auth: FirebaseAuth,modifier: Modifier,onLoginSuccess:()-> Unit) 
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var errorMessage by remember { mutableStateOf<String?>(null) }
-    var visible by remember { mutableStateOf(true) }
+    var visible by remember { mutableStateOf(false) }
 
     Column(
         modifier = Modifier

@@ -70,20 +70,23 @@ fun NuevoScreen(onAgregarJuego: (Juego) -> Unit, onNavigateBack: () -> Unit) {
             label = { Text("URL Imagen") },
         )
         Spacer(modifier = Modifier.height(16.dp))
-        Row(horizontalArrangement = Arrangement.Start, modifier = Modifier.fillMaxWidth()) {
-            Button(modifier = Modifier.fillMaxWidth()
-                .padding(start = 40.dp, end = 40.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF5D7D7C)),
+        Row(
+            horizontalArrangement = Arrangement.Center,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Button(
                 onClick = {
                     if (nombre.isNotBlank() && consola.isNotBlank()) {
                         val notaDouble = nota.toDoubleOrNull() ?: 0.0
-                        onAgregarJuego(Juego(
-                            nombre = nombre,
-                            nota = notaDouble,
-                            descripcion = descripcion,
-                            consola = consola,
-                            imagenUrl = imagenUrl
-                        ))
+                        onAgregarJuego(
+                            Juego(
+                                nombre = nombre,
+                                nota = notaDouble,
+                                descripcion = descripcion,
+                                consola = consola,
+                                imagenUrl = imagenUrl
+                            )
+                        )
                         nombre = ""
                         nota = ""
                         descripcion = ""
@@ -91,11 +94,16 @@ fun NuevoScreen(onAgregarJuego: (Juego) -> Unit, onNavigateBack: () -> Unit) {
                         imagenUrl = ""
                         onNavigateBack()
                     }
-                }) {
-                Text("Agregar Juego")
+                },
+                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF5D7D7C)),
+                modifier = Modifier.padding(8.dp)
+            ) {
+                Text("Agregar")
             }
-            Spacer(modifier = Modifier.width(20.dp))
-            Button(onClick = { onNavigateBack() }) {
+            Button(
+                onClick = { onNavigateBack() },
+                modifier = Modifier.padding(8.dp)
+            ) {
                 Text("Cancelar")
             }
         }
